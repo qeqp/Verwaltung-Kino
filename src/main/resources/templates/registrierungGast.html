@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrierung</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Neues Konto erstellen:</h1>
+
+    <form method="post" th:action="@{/registrierungGast}" th:object="${kunde}" class="mb-3">
+        <label>Email</label>
+        <input type="text" id="email" th:field="*{email}" required="required" class="form-control">
+        <br>
+        <label>Passwort</label>
+        <input type="password" id="passwort" th:field="*{passwort}" required="required" class="form-control">
+        <br>
+        <label>Vorname</label>
+        <input type="text" id="vorname" th:field="*{vorname}" required="required" class="form-control">
+        <br>
+        <label>Nachname</label>
+        <input type="text" id="nachname" th:field="*{nachname}" required="required" class="form-control">
+        <br>
+        <label>Geburtsdatum</label>
+        <input type="date" id="datum" th:field="*{geburtsdatum}" required="required" class="form-control">
+        <br>
+        <label>Strasse</label>
+        <input type="text" id="strasse" th:field="*{strasse}" required="required" class="form-control">
+        <br>
+        <label>Hausnummer</label>
+        <input type="text" id="hausnummer" th:field="*{hausnummer}" required="required" class="form-control">
+        <br>
+        <label>Stadt</label>
+        <input type="text" id="stadt" th:field="*{stadt}" required="required" class="form-control">
+        <br>
+        <label>PLZ</label>
+        <input type="text" id="plz" th:field="*{plz}" required="required" class="form-control">
+        <br>
+        <button type="submit" class="btn btn-primary mb-3">Konto erstellen</button>
+    </form>
+
+</div>
+</body>
+</html>

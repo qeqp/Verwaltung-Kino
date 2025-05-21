@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+
+<div th:if="${role == 'kunde'}">
+    <div class="alert alert-success" role="alert">
+        Willkommen, Kunde: <span th:text="${vorname} + ' ' + ${nachname}"></span>
+    </div>
+</div>
+
+<div th:if="${role == 'mitarbeiter'}">
+    <div class="alert alert-success" role="alert">
+        Willkommen, Mitarbeiter: <span th:text="${vorname} + ' ' + ${nachname}"></span>
+    </div>
+</div>
+
+<div th:if="${error}">
+    <div class="alert alert-danger" role="alert">
+        <p th:text="${error}"></p>
+    </div>
+</div>
+
+<div th:if="${message}">
+    <div class="alert alert-success" role="alert">
+        <p th:text="${message}"></p>
+    </div>
+</div>
+
+<a href="/changePassword" class="btn btn-success">Passwort ändern</a>
+
+<h1>Vorstellungen:</h1>
+
+<form method="get" th:action="@{/vorstellung}" class="mb-3">
+    <div class="mb-3">
+        <label for="datum">Datum:</label>
+        <input type="date" id="datum" name="datum" class="form-control" placeholder="YYYY-MM-DD">
+    </div>
+    <div class="mb-3">
+        <label for="uhrzeit">Uhrzeit:</label>
+        <input type="time" id="uhrzeit" name="uhrzeit" class="form-control" placeholder="HH:MM">
+    </div>
+    <button type="submit" class="btn btn-primary">Filtern</button>
+</form>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>VID</th>
+        <th>Datum</th>
+        <th>Uhrzeit</th>
+        <th>Saalname</th>
+        <th>Film ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vorstellung : ${vorstellungen}">
+        <td th:text="${vorstellung.vId}"></td>
+        <td th:text="${#dates.format(vorstellung.datum, 'dd.MM.yyyy')}"></td>
+        <td th:text="${#dates.format(vorstellung.uhrzeit, 'HH:mm')}"></td>
+        <td th:text="${vorstellung.saalname}"></td>
+        <td th:text="${vorstellung.filmId}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h1>Neue Vorstellung hinzufügen:</h1>
+
+<a href="/addVorstellung" class="btn btn-primary mb-3">Vorstellung hinzufügen</a>
+
+
+</body>
+</html>

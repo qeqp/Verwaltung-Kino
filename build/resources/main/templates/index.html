@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kino</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+
+<div th:if="${success}" class="alert alert-success" role="alert">
+    <span th:text="${success}"></span>
+</div>
+
+  <h1 th:text = "${test1}">Kino:</h1>
+  <h2>Registrierte Kunden:</h2>
+
+  <table class="table">
+      <thead>
+      <tr>
+          <th>Email</th>
+          <th>Passwort</th>
+          <th>Vorname</th>
+          <th>Nachname</th>
+          <th>Geburtsdatum</th>
+          <th>Strasse</th>
+          <th>Hausnummer</th>
+          <th>Stadt</th>
+          <th>PLZ</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="kundeDTO : ${kunden}">
+          <td th:text="${kundeDTO.email()}"></td>
+          <!--td th:text="${'●'.repeat(kundeDTO.passwort().length())}"></td-->
+          <td th:text="${kundeDTO.passwort()}"></td>
+          <td th:text="${kundeDTO.vorname()}"></td>
+          <td th:text="${kundeDTO.nachname()}"></td>
+          <td th:text="${#temporals.format(kundeDTO.geburtsdatum(), 'dd.MM.yyyy')}"></td>
+          <td th:text="${kundeDTO.strasse()}"></td>
+          <td th:text="${kundeDTO.hausnummer()}"></td>
+          <td th:text="${kundeDTO.stadt()}"></td>
+          <td th:text="${kundeDTO.plz()}"></td>
+      </tr>
+      </tbody>
+  </table>
+
+  <form method="post" th:action="@{/tickets}" class="mb-3">
+      <label for="email">Als Kunde anmelden:</label>
+      <input type="text" id="email" name="email" placeholder="Email" required class="form-control mb-2">
+      <input type="password" id="kundePasswort" name="passwort" placeholder="Passwort" required class="form-control mb-2">
+      <div th:if="${error}" class="text-danger" th:text="${error}"></div> <!-- Error Message -->
+      <button type="submit" class="btn btn-primary">Anmelden</button>
+  </form>
+
+  <h2>Registrierte Mitarbeiter:</h2>
+  <table class="table">
+      <thead>
+      <tr>
+          <th>Mitarbeiterkennung</th>
+          <th>Vorname</th>
+          <th>Nachname</th>
+          <th>Gehalt</th>
+          <th>Einstellungsdatum</th>
+          <th>Passwort</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="mitarbeiter : ${mitarbeiter}">
+          <td th:text="${mitarbeiter.mitarbeiterkennung()}"></td>
+          <td th:text="${mitarbeiter.vorname()}"></td>
+          <td th:text="${mitarbeiter.nachname()}"></td>
+          <td th:text="${mitarbeiter.gehalt()}"></td>
+          <td th:text="${#temporals.format(mitarbeiter.einstellungdatum(), 'dd.MM.yyyy')}"></td>
+          <td th:text="${mitarbeiter.passwort()}"></td>
+      </tr>
+      </tbody>
+  </table>
+
+
+  <form method="post" th:action="@{/tickets}" class="mb-3">
+      <label for="mitarbeiterkennung">Als Mitarbeiter anmelden:</label>
+      <input type="text" id="mitarbeiterkennung" name="mitarbeiterkennung" placeholder="Mitarbeiterkennung" required class="form-control mb-2">
+      <input type="password" id="mitarbeiterPasswort" name="passwort" placeholder="Passwort" required class="form-control mb-2">
+      <div th:if="${error}" class="text-danger" th:text="${error}"></div> <!-- Error Message -->
+      <button type="submit" class="btn btn-primary">Anmelden</button>
+  </form>
+
+  <form method="post" th:action = "@{/registrierung}" class="mb-3">
+  <label>Neues Konto einrichten:</label> <br> <br>
+  <button type="submit" class="btn btn-primary mb-3">Registrieren</button>
+</form>
+</body>
+</html>
