@@ -1,4 +1,4 @@
-# Cinema Management System
+# Kino-Verwaltungssystem
 
 Eine Spring Boot Webanwendung zur Verwaltung eines Kinos mit PostgreSQL Datenbankanbindung.
 
